@@ -48,12 +48,15 @@ public class EventRouter {
             channel = new ArrayList<ListenerHolder>();
             _channels.put(channelId, channel);
         }
-        if(!channel.contains(listener)) {
-            if(useWeakReference)
-                channel.add(new WeakListenerHolder(listener));
-            else
-                channel.add(new ListenerHolder(listener));
-        }
+
+        ListenerHolder listenerHolder;
+        if(useWeakReference)
+            listenerHolder = new WeakListenerHolder(listener);
+        else
+            listenerHolder = new ListenerHolder(listener);
+        if(!channel.contains(listenerHolder))
+                channel.add(listenerHolder);
+        
         registerEventActions(listener.getClass());
     }
 

@@ -66,7 +66,7 @@ public class EventRouter {
         for(Object channelId:channelIds) {
             List<ListenerHolder> channel = _channels.get(channelId);
             if(channel != null) {
-                channel.remove(new ListenerHolder(listener));
+                channel.remove(new ListenerHolder(listener)); // uses .equals() from ListenerHolder
                 if(channel.isEmpty())
                     _channels.remove(channel);
             }
@@ -92,40 +92,40 @@ public class EventRouter {
      *         This method will continue to send actions if an error is had transmitting one action.
      */
     public synchronized static EventActionSendResult send(Object channelId, long actionId, Object ... args) {
-        List<EventActionResult> results = null;
-        List<EventActionError> errors = null;
-        List<ListenerHolder> lostWeakReferences = null;
-        Object tempResult;
+        List<EventActionResult> results = null; // holds return values
+        List<EventActionError> errors = null; // holds exceptions thrown when invoking actions
         List<ListenerHolder> channel = _channels.get(channelId);
-        Object listener;
         if(channel != null) {
+            List<ListenerHolder> lostWeakReferences = null; // used as a delete queue for deleting garbage
+            Object tempResult;
+            Object listener;
             for(ListenerHolder listenerHolder:channel) {
                 listener = listenerHolder.getObject();
                 if(listener != null) {
                     for(EventActionMethod actionMethod:_actions.get(listener.getClass())) {
-                        if(actionMethod.getActionId() == actionId) {
+                        if(actionMethod.getActionId() == actionId) { // if the cached action event method is the right id
                             try {
-                                tempResult = actionMethod.getMethod().invoke(listener, args);
+                                tempResult = actionMethod.getMethod().invoke(listener, args); // run the method
                                 if(results == null)
                                     results = new ArrayList<EventActionResult>();
                                 results.add(new EventActionResult(tempResult, actionMethod.getMethod(), listener));
-                            } catch (Exception e) {
+                            } catch (Exception e) { // if there was an error invoking the method
                                 if(errors == null)
                                     errors = new ArrayList<EventActionError>();
                                 errors.add(new EventActionError(listener, actionId, actionMethod.getMethod(), e));
                             }
                         }
                     }
-                } else {
+                } else { // if the weak reference now returns garbage
                     if(lostWeakReferences == null)
                         lostWeakReferences = new ArrayList<ListenerHolder>();
                     lostWeakReferences.add(listenerHolder);
                 }
             }
-        }
-        if(lostWeakReferences != null && lostWeakReferences.size() > 0) {
-            for(ListenerHolder listenerHolder:lostWeakReferences)
-                channel.remove(listenerHolder);
+            if(lostWeakReferences != null && lostWeakReferences.size() > 0) { // remove garbage from the channel
+                for(ListenerHolder listenerHolder:lostWeakReferences)
+                    channel.remove(listenerHolder);
+            }
         }
         return new EventActionSendResult(results, errors);
     }
@@ -135,14 +135,14 @@ public class EventRouter {
      * @param clazz the class to cache
      */
     private synchronized static void registerEventActions(Class clazz) {
-        if(!_actions.containsKey(clazz)) {
+        if(!_actions.containsKey(clazz)) { // only register action methods if this class has yet to be processed
             List<EventActionMethod> actionMethods = new ArrayList<EventActionMethod>();
             for(Method method:clazz.getMethods()) {
-                for(Annotation annotation:method.getAnnotations()) {
-                    if(annotation instanceof EventAction) {
+                for(Annotation annotation:method.getAnnotations()) { // annotations per method
+                    if(annotation instanceof EventAction) { // single action id
                         EventAction eventAction = (EventAction) annotation;
                         actionMethods.add(new EventActionMethod(eventAction.value(), method));
-                    } else if(annotation instanceof EventActions) {
+                    } else if(annotation instanceof EventActions) { // multiple action id
                         EventActions eventActions = (EventActions) annotation;
                         for(long actionId:eventActions.value()) {
                             actionMethods.add(new EventActionMethod(actionId, method));
@@ -150,10 +150,13 @@ public class EventRouter {
                     }
                 }
             }
-            _actions.put(clazz, actionMethods);
+            _actions.put(clazz, actionMethods); // add the action event methods to the chache
         }
     }
 
+    /**
+     * a simple wrapper for an object.
+     */
     private static class ListenerHolder {
         private final Object _object;
 
@@ -179,6 +182,9 @@ public class EventRouter {
         }
     }
 
+    /**
+     * a simple wrapper for an object that uses a weak reference.
+     */
     private static class WeakListenerHolder extends ListenerHolder {
         private WeakListenerHolder(Object object) {
             super(new WeakReference(object));

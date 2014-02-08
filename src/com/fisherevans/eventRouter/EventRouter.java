@@ -1,6 +1,7 @@
 package com.fisherevans.eventRouter;
 
 import java.lang.annotation.Annotation;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -15,7 +16,7 @@ public class EventRouter {
     private static Map<Class, List<EventActionMethod>> _actions;
 
     /** a map of Channel IDs and a list of Objects listening to that channel **/
-    private static Map<Object, List<Object>> _channels;
+    private static Map<Object, List<ListenerHolder>> _channels;
 
     /**
      * Initialize this Event Router (allocate and instantiate private fields).
@@ -23,25 +24,37 @@ public class EventRouter {
      */
     public synchronized static void init() {
         _actions = new HashMap<Class, List<EventActionMethod>>();
-        _channels = new HashMap<Object, List<Object>>();
+        _channels = new HashMap<Object, List<ListenerHolder>>();
     }
 
     /**
      * Subscribe an object to receive EventAction calls on a given ChannelID
-     * @param channelIds The channel ID the object should "listen" on
+     * @param channelId The channel ID the object should "listen" on
      * @param listener The object listening for event actions
      */
-    public synchronized static void subscribe(Object listener, Object ... channelIds) {
-        for(Object channelId:channelIds) {
-            List<Object> channel = _channels.get(channelId);
-            if(channel == null) {
-                channel = new ArrayList<Object>();
-                _channels.put(channelId, channel);
-            }
-            if(!channel.contains(listener))
-                channel.add(listener);
-            registerEventActions(listener.getClass());
+    public synchronized static void subscribe(Object listener, Object channelId) {
+        subscribe(listener, false, channelId);
+    }
+
+    /**
+     * Subscribe an object to receive EventAction calls on a given ChannelID
+     * @param channelId The channel ID the object should "listen" on
+     * @param useWeakReference true if this system should use a weak reference
+     * @param listener The object listening for event actions
+     */
+    public synchronized static void subscribe(Object listener, boolean useWeakReference, Object channelId) {
+        List<ListenerHolder> channel = _channels.get(channelId);
+        if(channel == null) {
+            channel = new ArrayList<ListenerHolder>();
+            _channels.put(channelId, channel);
         }
+        if(!channel.contains(listener)) {
+            if(useWeakReference)
+                channel.add(new WeakListenerHolder(listener));
+            else
+                channel.add(new ListenerHolder(listener));
+        }
+        registerEventActions(listener.getClass());
     }
 
     /**
@@ -51,9 +64,9 @@ public class EventRouter {
      */
     public synchronized static void unSubscribe(Object listener, Object ... channelIds) {
         for(Object channelId:channelIds) {
-            List<Object> channel = _channels.get(channelId);
+            List<ListenerHolder> channel = _channels.get(channelId);
             if(channel != null) {
-                channel.remove(listener);
+                channel.remove(new ListenerHolder(listener));
                 if(channel.isEmpty())
                     _channels.remove(channel);
             }
@@ -66,8 +79,7 @@ public class EventRouter {
      * @param listener the object who's done listening.
      */
     public synchronized static void unSubscribeAll(Object listener) {
-        for(Object channelId:_channels.keySet())
-            unSubscribe(channelId, listener);
+        unSubscribe(listener, _channels.keySet().toArray());
     }
 
     /**
@@ -79,29 +91,24 @@ public class EventRouter {
      *         Returns null if no errors were had.
      *         This method will continue to send actions if an error is had transmitting one action.
      */
-    public synchronized static List<EventActionError> send(Object channelId, long actionId, Object ... args) {
-        return send(new Object[] {channelId}, actionId, args);
-    }
-
-    /**
-     * Send an action to all objects listening to the given channels
-     * @param channelIds the channels to send the action event on
-     * @param actionId the action to call
-     * @param args the optional arguments to pass with the actions
-     * @return A list of errors and exceptions that may occur during transmission.
-     *         Returns null if no errors were had.
-     *         This method will continue to send actions if an error is had transmitting one action.
-     */
-    public synchronized static List<EventActionError> send(Object[] channelIds, long actionId, Object ... args) {
+    public synchronized static EventActionSendResult send(Object channelId, long actionId, Object ... args) {
+        List<EventActionResult> results = null;
         List<EventActionError> errors = null;
-        for(Object channelId:channelIds) {
-            List<Object> channel = _channels.get(channelId);
-            if(channel != null) {
-                for(Object listener:channel) {
+        List<ListenerHolder> lostWeakReferences = null;
+        Object tempResult;
+        List<ListenerHolder> channel = _channels.get(channelId);
+        Object listener;
+        if(channel != null) {
+            for(ListenerHolder listenerHolder:channel) {
+                listener = listenerHolder.getObject();
+                if(listener != null) {
                     for(EventActionMethod actionMethod:_actions.get(listener.getClass())) {
                         if(actionMethod.getActionId() == actionId) {
                             try {
-                                actionMethod.getMethod().invoke(listener, args);
+                                tempResult = actionMethod.getMethod().invoke(listener, args);
+                                if(results == null)
+                                    results = new ArrayList<EventActionResult>();
+                                results.add(new EventActionResult(tempResult, actionMethod.getMethod(), listener));
                             } catch (Exception e) {
                                 if(errors == null)
                                     errors = new ArrayList<EventActionError>();
@@ -109,10 +116,18 @@ public class EventRouter {
                             }
                         }
                     }
+                } else {
+                    if(lostWeakReferences == null)
+                        lostWeakReferences = new ArrayList<ListenerHolder>();
+                    lostWeakReferences.add(listenerHolder);
                 }
             }
         }
-        return errors;
+        if(lostWeakReferences != null && lostWeakReferences.size() > 0) {
+            for(ListenerHolder listenerHolder:lostWeakReferences)
+                channel.remove(listenerHolder);
+        }
+        return new EventActionSendResult(results, errors);
     }
 
     /**
@@ -136,6 +151,41 @@ public class EventRouter {
                 }
             }
             _actions.put(clazz, actionMethods);
+        }
+    }
+
+    private static class ListenerHolder {
+        private final Object _object;
+
+        private ListenerHolder(Object object) {
+            _object = object;
+        }
+
+        public Object getObject() {
+            return _object;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if(obj instanceof ListenerHolder) {
+                return ((ListenerHolder)obj).getObject() == getObject();
+            } else
+                return false;
+        }
+
+        @Override
+        public int hashCode() {
+            return getObject().hashCode();
+        }
+    }
+
+    private static class WeakListenerHolder extends ListenerHolder {
+        private WeakListenerHolder(Object object) {
+            super(new WeakReference(object));
+        }
+
+        public Object getObject() {
+            return ((WeakReference)super.getObject()).get();
         }
     }
 

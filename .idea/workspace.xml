@@ -11,7 +11,7 @@
     <file path="/Main.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1386265933074" ignored="false" />
     <file path="/InvaidMassException.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1386265694924" ignored="false" />
     <file path="/InvalidMassException.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1386265686564" ignored="false" />
-    <file path="/Test.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391795722308" ignored="false" />
+    <file path="/Test.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391890244592" ignored="false" />
     <file path="/PostOffice.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391658358313" ignored="false" />
     <file path="/Recipient.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391654471061" ignored="false" />
     <file path="/Postage.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391656710644" ignored="false" />
@@ -19,11 +19,13 @@
     <file path="/fragment.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391794071193" ignored="false" />
     <file path="/EventAction.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391796344295" ignored="false" />
     <file path="/EventActionLibrary.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391657494743" ignored="false" />
-    <file path="/EventRouter.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391796106434" ignored="false" />
+    <file path="/EventRouter.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391889463433" ignored="false" />
     <file path="/Driver.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391663237935" ignored="false" />
     <file path="/EventChannelLibrary.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391658543615" ignored="false" />
     <file path="/EventActionError.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391796304159" ignored="false" />
     <file path="/EventActions.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391796325888" ignored="false" />
+    <file path="/EventActionResult.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391885717771" ignored="false" />
+    <file path="/EventActionSendResult.java" changelist="6ea099df-8e1c-4218-ac80-0cbfbdc9a405" time="1391885792808" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,22 +79,7 @@
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <method_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/test/Test.java" line="30" class="com.fisherevans.eventRouter.test.Test" package="com.fisherevans.eventRouter.test">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/test/Test.java" line="34" class="com.fisherevans.eventRouter.test.Test" package="com.fisherevans.eventRouter.test">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/test/Test.java" line="83" class="com.fisherevans.eventRouter.test.Test" package="com.fisherevans.eventRouter.test">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -120,11 +107,29 @@
       <file leaf-file-name="EventRouter.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventRouter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="107" column="110" selection-start="4726" selection-end="4726" vertical-scroll-proportion="3.0726352">
+            <state line="52" column="50" selection-start="2044" selection-end="2062" vertical-scroll-proportion="1.2756933">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5186#5205#0" expanded="true" />
+                <element signature="e#6020#6039#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EventActionResult.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventActionResult.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="38" selection-start="483" selection-end="483" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EventActionSendResult.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventActionSendResult.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="49" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -141,8 +146,11 @@
       <file leaf-file-name="Test.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/test/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="5" selection-start="2153" selection-end="2153" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="20" column="29" selection-start="547" selection-end="548" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#1069#1642#0" expanded="true" />
+                <element signature="e#1631#1632#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -175,8 +183,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/Recipient.java" />
-        <option value="$PROJECT_DIR$/src/Postage.java" />
         <option value="$PROJECT_DIR$/src/EventActionLibrary.java" />
         <option value="$PROJECT_DIR$/src/Address.java" />
         <option value="$PROJECT_DIR$/src/PostOffice.java" />
@@ -186,19 +192,21 @@
         <option value="$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventActionMethod.java" />
         <option value="$PROJECT_DIR$/src/Camera.java" />
         <option value="$PROJECT_DIR$/src/Driver.java" />
-        <option value="$PROJECT_DIR$/src/com/fisherevans/eventRouter/test/Test.java" />
-        <option value="$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventRouter.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventActionError.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventAction.java" />
         <option value="$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventActions.java" />
+        <option value="$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventActionResult.java" />
+        <option value="$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventActionSendResult.java" />
+        <option value="$PROJECT_DIR$/src/com/fisherevans/eventRouter/test/Test.java" />
+        <option value="$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventRouter.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="66" />
+    <option name="x" value="69" />
     <option name="y" value="-8" />
-    <option name="width" value="1622" />
-    <option name="height" value="1066" />
+    <option name="width" value="1859" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -308,16 +316,16 @@
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="OverrideImplement.combined" value="true" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="MemberChooser.showClasses" value="true" />
+    <property name="MemberChooser.sorted" value="false" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="dynamic.classpath" value="false" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -391,7 +399,13 @@
         <option name="TRANSPORT" value="0" />
         <option name="LOCAL" value="true" />
       </RunnerSettings>
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
@@ -408,19 +422,6 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -449,6 +450,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -515,7 +529,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="66" y="-8" width="1622" height="1066" extended-state="6" />
+    <frame x="69" y="-8" width="1859" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -523,21 +537,21 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3936053" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39274278" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32870865" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15705128" sideWeight="0.68136716" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31863284" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15692821" sideWeight="0.68196374" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3180363" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -610,12 +624,19 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="32" selection-start="261" selection-end="261" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventRouter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5186#5205#0" expanded="true" />
+            <element signature="e#6020#6039#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -623,7 +644,10 @@
     <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/test/Test.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="61" column="3" selection-start="1972" selection-end="1997" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <element signature="e#1069#1642#0" expanded="true" />
+            <element signature="e#1631#1632#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -653,6 +677,20 @@
         <state line="40" column="35" selection-start="694" selection-end="780" vertical-scroll-proportion="0.46735394" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventActions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="12" selection-start="310" selection-end="310" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.7.0_25/src.zip!/java/lang/reflect/Method.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="587" column="18" selection-start="24083" selection-end="24083" vertical-scroll-proportion="0.66849613">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventAction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="32" selection-start="261" selection-end="261" vertical-scroll-proportion="0.0">
@@ -667,26 +705,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/test/Test.java">
+    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventActionResult.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="5" selection-start="2153" selection-end="2153" vertical-scroll-proportion="0.0">
+        <state line="19" column="38" selection-start="483" selection-end="483" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventActions.java">
+    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/test/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="12" selection-start="310" selection-end="310" vertical-scroll-proportion="0.0">
+        <state line="20" column="29" selection-start="547" selection-end="548" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1069#1642#0" expanded="true" />
+            <element signature="e#1631#1632#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.7.0_25/src.zip!/java/lang/Object.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="271" column="29" selection-start="11904" selection-end="11904" vertical-scroll-proportion="0.028192371">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventActionSendResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="49" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fisherevans/eventRouter/EventRouter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="110" selection-start="4726" selection-end="4726" vertical-scroll-proportion="3.0726352">
+        <state line="52" column="50" selection-start="2044" selection-end="2062" vertical-scroll-proportion="1.2756933">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5186#5205#0" expanded="true" />
+            <element signature="e#6020#6039#0" expanded="true" />
           </folding>
         </state>
       </provider>

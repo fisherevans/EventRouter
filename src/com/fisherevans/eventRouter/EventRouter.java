@@ -28,12 +28,13 @@ public class EventRouter {
     }
 
     /**
-     * Subscribe an object to receive EventAction calls on a given ChannelID
+     * Subscribe an object to receive EventAction calls on a given ChannelID.
+     * By default, the listener uses a weak reference.
      * @param channelId The channel ID the object should "listen" on
      * @param listener The object listening for event actions
      */
     public synchronized static void subscribe(Object listener, Object channelId) {
-        subscribe(listener, false, channelId);
+        subscribe(listener, true, channelId);
     }
 
     /**
@@ -56,7 +57,7 @@ public class EventRouter {
             listenerHolder = new ListenerHolder(listener);
         if(!channel.contains(listenerHolder))
                 channel.add(listenerHolder);
-        
+
         registerEventActions(listener.getClass());
     }
 

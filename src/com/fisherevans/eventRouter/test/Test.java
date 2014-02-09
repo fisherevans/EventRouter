@@ -52,6 +52,7 @@ public class Test {
         Thread thread = new Thread(runnable);
         thread.start();
         t1 = null;
+        System.gc();
     }
 
     public static int test(Object channel, long action, Object ... args) {

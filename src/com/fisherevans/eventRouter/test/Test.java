@@ -23,6 +23,9 @@ public class Test {
         EventRouter.init();
         EventRouter.subscribe(t1, true, CHANNEL_ONE);
 
+        EventRouter.loadListeners("com.fisherevans.eventRouter.test");
+        EventRouter.sendStatic(987);
+
         test(CHANNEL_ONE, ACTION_ONE, 4);
         test(CHANNEL_ONE, ACTION_ONE, "string");
 
@@ -107,5 +110,10 @@ public class Test {
     @EventAction(ACTION_TWO)
     public Double cube(double x) {
         return x*x*x;
+    }
+
+    @StaticEventAction(987)
+    public static void testStatic() {
+        System.out.println("Static method action");
     }
 }

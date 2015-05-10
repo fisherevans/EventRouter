@@ -1,5 +1,7 @@
 package com.fisherevans.eventRouter;
 
+import org.reflections.Reflections;
+
 import java.lang.annotation.Annotation;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
@@ -18,6 +20,8 @@ public class EventRouter {
     /** a map of Channel IDs and a list of Objects listening to that channel **/
     private static Map<Object, List<ListenerHolder>> _channels;
 
+    private static Map<Long, List<Method>> _staticActions;
+
     /**
      * Initialize this Event Router (allocate and instantiate private fields).
      * Can also be used to completely reset this EventRouter.
@@ -25,6 +29,28 @@ public class EventRouter {
     public synchronized static void init() {
         _actions = new HashMap<Class, List<EventActionMethod>>();
         _channels = new HashMap<Object, List<ListenerHolder>>();
+        _staticActions = new HashMap<Long, List<Method>>();
+    }
+
+    public synchronized static void loadListeners(String basePackage) {
+        Reflections r = new Reflections(basePackage);
+        for(Method method:r.getMethodsAnnotatedWith(StaticEventAction.class)) {
+            addStaticAction(method);
+        }
+    }
+
+    private synchronized static void addStaticAction(Method method) {
+        try {
+            Long id = method.getAnnotation(StaticEventAction.class).value();
+            if(!_staticActions.containsKey(id))
+                _staticActions.put(id, new ArrayList<Method>());
+            List<Method> list = _staticActions.get(id);
+            if(!list.contains(method))
+                list.add(method);
+        } catch(Exception e) {
+            System.err.println("Failed to load static event action!");
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -132,6 +158,18 @@ public class EventRouter {
             }
         }
         return new EventActionSendResult(results, errors);
+    }
+
+    public synchronized static void sendStatic(long actionId) {
+        if(_staticActions.containsKey(actionId)) {
+            for(Method method:_staticActions.get(actionId)) {
+                try {
+                    method.invoke(null);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     /**
